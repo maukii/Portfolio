@@ -1,16 +1,23 @@
 * {
-  box-sizing: border-box;
+	box-sizing: border-box;
 }
 
 body {
-  background-color: #f1f1f1;
-  padding: 20px;
-  font-family: Arial;
+	margin: 0;
+	background-color: #f1f1f1;
+	padding: 20px;
+	font-family: Arial;
+}
+
+header::after {
+	content: '';
+	display: table;
+	clear: both;
 }
 
 .main {
-  max-width: 1000px;
-  margin: auto;
+	max-width: 1000px;
+	margin: auto;
 }
 
 h1 {
@@ -21,7 +28,7 @@ h1 {
 
 .navbar {
 	background-color: #1a0000;
-	margin: 0;
+	margin: 0px;
 	padding: 30px;
 }
 
@@ -41,8 +48,15 @@ h1 {
 	color: black;
 }
 
-li {
+.navbar ul {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.navbar li {
 	display: inline-block;
+	margin-left: 70px;
 }
 
 .row {
