@@ -2,92 +2,115 @@
 <html>
 <head>
 	<title>Portfolio</title>
+	<link rel="stylesheet" type="text/css" href="Resources/style.css">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<script src="https://unpkg.com/scrollreveal@4.0.5/dist/scrollreveal.min.js"></script>
 </head>
 <body>
-<link rel="stylesheet" type="text/css" href="Resources/style.css">
+
+<div class="navbar">
+	<ul>
+		<li><a class="active">Projects</a></li>
+		<li><a href="about.html">About</a></li>
+	</ul>
+</div>
 
 <header>
-	<div class="navbar">
-		<ul>
-			<li><a class="active" href="projects.html">Projects</a></li>
-			<li><a href="about.html">About</a></li>
-			<li><a href="#">Contact??</a></li>
-		</ul>
-	</div>
+	<h1 class="anim">Published projects</h1>
 </header>
 
+
 <div class="main">
-
-	<center><h1>Projects</h1></center>
-
 	<div class="row">
 		<div class="content">
-			<video width="100%" height="100%" poster="Resources/Images/FastFlare.png" controls>
-				<source src="Resources/Videos/FastFlare.mp4" type="video/mp4">
-				Your browser doesn't support the video tag
-			</video>
+			<div class="box2">
+				<h1 class="anim">Fast Flare</h1>
+				<p class="anim">Free to play arcade themed mobile game created with Unreal Engine 4.</p>
+				<p class="anim">My role in this project was a gameplay programmer. I created the movement system the player is using and added some camera smoothing and zooming. After that I focused on optimization. <br><br>
+					Download link: <a href="https://play.google.com/store/apps/details?id=com.FivePointStarDust.FastFlare">Fast Flare (PlayStore)</a></p>
 
-			<h3>Fast Flare</h3>
-			<p>Free to play arcade themed mobile game created with Unreal Engine 4.</p>
-			<p>My role in this project was a gameplay programmer. I created the movement system the player is using and added some camera smoothing and zooming. After that I focused on optimization. <br><br>
-				Download link: <a href="https://play.google.com/store/apps/details?id=com.FivePointStarDust.FastFlare">Fast Flare (PlayStore)</a></p>
+				<video width="100%" height="100%" poster="Resources/Images/FastFlare.png" controls>
+					<source src="Resources/Videos/FastFlare.mp4" type="video/mp4">
+					Your browser doesn't support the video tag
+				</video>
+			</div>
 		</div>
 	</div>
 
 	<div class="row">
 		<div class="content">
-			<img src="Resources/Images/Sabreurs.png" alt="Sabreurs" style="width:100%">
-			<h3>Sabreurs A Noble Duel</h3>
-			<p>Sabreurs - A Noble Duel is a local 2-player fencing game about two noblemen settling their disagreement. Maybe someone insulted the other's mother, wronged their family or doubted their noble upbringings. But that doesn't matter - for it is time to settle this by a duel!</p>
-			<p>In this project I created the player controller system, created an audio controller and handled menus in the game. <br><br>
-				Steam link: <a href="https://store.steampowered.com/app/921840/Sabreurs__A_Noble_Duel/">Sabreurs A Noble Duel</a></p>
+			<div class="box2">
+				<h1 class="anim">Sabreurs A Noble Duel</h1>
+				<p class="anim">Sabreurs - A Noble Duel is a local 2-player fencing game about two noblemen settling their disagreement. Maybe someone insulted the other's mother, wronged their family or doubted their noble upbringings. But that doesn't matter - for it is time to settle this by a duel!</p>
+				<p class="anim">In this project I created the player controller system, created an audio controller and handled menus in the game. <br><br>
+					Steam link: <a href="https://store.steampowered.com/app/921840/Sabreurs__A_Noble_Duel/">Sabreurs A Noble Duel</a></p>
+
+				<img src="Resources/Images/Sabreurs.png" alt="Sabreurs" style="width:100%">
+			</div>
+		</div>
+	</div>
+
+	<header><h1>Own projects and game jam games</h1></header>
+
+	<div class="row">
+		<div class="content">
+			<div class="box2">
+				<h1 class="anim">Fantastic Train</h1>
+				<p class="anim">The objective of the game is to keep your passengers safe and get the train to the next station! There is 3 different types of enemies that the players will encounter on their trips. Players are able to upgrade their train with better guns and 3 different types of fuel ores only if they perform well on their journeys.</p>
+				<p class="anim">In Fantastic Train I created the player input system, an audio controller, and did some of the enemy AIs seen in the game.<br><br>
+					The game was not entirely compleated but is playable: <a href="https://github.com/Kirsturino/Lovetastic-Train">Github repo link</a></p>
+
+				<video width="100%" height="100%" poster="Resources/Images/FantasticTrain.png" controls>
+					<source src="Resources/Videos/FantasticTrain.mp4" type="video/mp4">
+					Your browser doesn't support the video tag
+				</video>
+			</div>
 		</div>
 	</div>
 
 	<div class="row">
 		<div class="content">
-			<video width="100%" height="100%" poster="Resources/Images/FantasticTrain.png" controls>
-				<source src="Resources/Videos/FantasticTrain.mp4" type="video/mp4">
-				Your browser doesn't support the video tag
-			</video>
+			<div class="box2">
+				<h1 class="anim">The Lost Spring</h1>
+				<p class="anim">The story of the game can be red from the main menu of our game. This gamejam project was created with 2 programmers and a single graphics artist during 42hours spring game jam event. We had time to create 2 different game modeds. There is a story mode for the game which has fixed levels and endless mode that will procedurally generate more level for the player and the camera will eventually catch up.</p>
+				<p class="anim">My role in this team was to create the gameplay part which includes the jumping of the player, players animations and the jump boost bar to jump higher. I used playerprefs to save the best score on endless mode.<br><br>
+					Complete game can be found in: <a href="asdasd 123">Github repo link</a></p>
 
-			<h3>Fantastic Train</h3>
-			<p>The objective of the game is to keep your passengers safe and get the train to the next station! There is 3 different types of enemies that the players will encounter on their trips. Players are able to upgrade their train with better guns and 3 different types of fuel ores only if they perform well on their journeys.</p>
-			<p>In Fantastic Train I created the player input system, an audio controller, and did some of the enemy AIs seen in the game.<br><br>
-				The game was not entirely compleated but is playable: <a href="https://github.com/Kirsturino/Lovetastic-Train">Github repo link</a></p>
+				<video width="100%" height="100%" controls muted>
+					<source src="Resources/Videos/TheLostSpring.mp4" type="video/mp4">
+					Make sure your browser supports mp4 files.
+				</video>
+			</div>
 		</div>
 	</div>
 
 	<div class="row">
 		<div class="content">
-			<video width="100%" height="100%" controls muted>
-				<source src="Resources/Videos/TheLostSpring.mp4" type="video/mp4">
-				Make sure your browser supports mp4 files.
-			</video>
+			<div class="box2">
+				<h1 class="anim">Supliments For The Lords</h1>
+				<p class="anim">The main objective of the game is to get the correct pills and bring them to your lord. You can throw the pill at your enemy to make them fly and drop the pill they are carrying. It's possible to make the other players lord angry by giving them a wrong pill. The game requires controllers to be played.</p>
+				<p class="anim">I created most of the gameplay part in this gamejam project. I creted the pick-up and throwing mechanics and the audio manager. I also created the controller input system (first time working with conrollers).<br><br>
+					Complete game can be found in: <a href="https://github.com/maukii/PreXmaX">Github repo link</a></p>
 
-			<h3>The Lost Spring</h3>
-			<p>The story of the game can be red from the main menu of our game. This gamejam project was created with 2 programmers and a single graphics artist during 42hours spring game jam event. We had time to create 2 different game modeds. There is a story mode for the game which has fixed levels and endless mode that will procedurally generate more level for the player and the camera will eventually catch up.</p>
-			<p>My role in this team was to create the gameplay part which includes the jumping of the player, players animations and the jump boost bar to jump higher. I used playerprefs to save the best score on endless mode.<br><br>
-				Complete game can be found in: <a href="asdasd 123">Github repo link</a></p>
-		</div>
-	</div>
-
-	<div class="row">
-		<div class="content">
-			<video width="100%" height="100%" poster="Resources/Images/SupplimentsForTheLords.png" controls>
-				<source src="Resources/Videos/SupplementsForTheLords.mp4" type="video/mp4">
-				Make sure your browser supports mp4 files.
-			</video>
-
-			<h3>Supliments For The Lords</h3>
-			<p>The main objective of the game is to get the correct pills and bring them to your lord. You can throw the pill at your enemy to make them fly and drop the pill they are carrying. It's possible to make the other players lord angry by giving them a wrong pill. The game requires controllers to be played.</p>
-			<p>I created most of the gameplay part in this gamejam project. I creted the pick-up and throwing mechanics and the audio manager. I also created the controller input system (first time working with conrollers).<br><br>
-				Complete game can be found in: <a href="https://github.com/maukii/PreXmaX">Github repo link</a></p>
+				<video width="100%" height="100%" poster="Resources/Images/SupplimentsForTheLords.png" controls>
+					<source src="Resources/Videos/SupplementsForTheLords.mp4" type="video/mp4">
+					Make sure your browser supports mp4 files.
+				</video>
+			</div>
 		</div>
 	</div>
 
 <!-- END MAIN -->
 </div>
+
+<script type="text/javascript">
+	window.sr = ScrollReveal();
+	sr.reveal('.anim');
+</script>
+
+<footer>
+	<p>Future programmer</p>
+</footer>
 
 </body>
 </html>
