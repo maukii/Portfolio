@@ -1,6 +1,14 @@
 [Link to portfolio](https://maukii.github.io/Portfolio/projects.html)
 
-My Programmer Portfolio
+Credits:
 
-Hello and welcome to my github! Here I will be adding most of my school projects and also my game jam games.
-See games I have worked on through the link above.
+	Demo Images:
+		Unsplash (unsplash.com)
+
+	Icons:
+		Font Awesome (fontawesome.io)
+
+	Other:
+		jQuery (jquery.com)
+		Scrollex (github.com/ajlkn/jquery.scrollex)
+		Responsive Tools (github.com/ajlkn/responsive-tools)
