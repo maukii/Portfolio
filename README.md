@@ -1,4 +1,4 @@
-[Link to portfolio](https://maukii.github.io/Portfolio/projects.html)
+[Link to portfolio](https://maukii.github.io/Portfolio/index.html)
 
 Credits:
 
