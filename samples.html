@@ -48,8 +48,9 @@
 					<header class="major">
 						<h1><a href="https://github.com/maukii/CirculationUnity">Project Circulation</a></h1>
 						<p>
-							A hobby project focusing on circle-to-circle collisions.<br>
-							Emphasis on creating a simple project with a clean structure.
+							Circulation is a personal hobby project aiming to explore circle-to-circle collision handling within Unity. 
+							The primary focus was to implement this collision mechanism independently, emphasizing simplicity and maintaining a clean code structure. 
+							This project is intended to serve as an educational example within Unity, demonstrating clean coding practices and various related examples.
 						</p>
 					</header>
 					<!-- Video or image of the project -->
@@ -234,17 +235,75 @@ public class GameStateUI : MonoBehaviour
 					<header class="major">
 						<h1><a href="https://github.com/maukii/Bootstrap">Bootstrap Project</a></h1>
 						<p>
-							Project that contains many useful tools and helper classes.
-							When I work with Unity this my custom package I always bring to my projects.
+							This Unity project comprises a personalized custom package, a collection of versatile tools, and helpful utility classes that serve as a consistent companion across my projects. 
+							It includes:<br><br>
+
+							Custom Tools:<br>
+
+							A suite of specialized tools designed to streamline various aspects of Unity development.
+							Includes a Logger for efficient log management, a Bootstrapper for centralized initialization, and a Scene Switch Tool for seamless scene management.
+							<br><br>
+							Helper Classes:<br>
+
+							A set of utility classes tailored to enhance workflow efficiency and project organization within Unity.
+							Employs various helper scripts designed to simplify common tasks and facilitate smoother development cycles.
+							This carefully curated package acts as a go-to resource, enhancing productivity and maintaining consistency in project workflows within the Unity environment.
 						</p>
 					</header>
-					
+							
 					<!-- Buttons or actions related to the project -->
 					<ul class="actions special">
 						<li><a href="#" class="button large" onclick="downloadGame('Bootstrap')">Download Unity package</a></li>
 						<li><a href="https://github.com/maukii/Bootstrap" class="button large">Github</a></li>
 					</ul>
 					
+					<!-- Bootstrapper -->
+					<div class="code-block">
+						<div class="toggle-icon" onclick="toggleCodeContent(this)">
+							<img src="Resources/Images/CodeBlockToggleOpen.png" class="open-icon">
+							<img src="Resources/Images/CodeBlockToggleClose.png" class="close-icon" style="display: none;">
+						</div>
+						<h3>Bootstrapper</h3>
+						<div class="code-content" style="display: none;">
+							<p>
+								There is many ways to implement Bootstrap logic, either having a Bootstrap scene or -script that handles project initialization.
+								I chose to go with the code solution that loads a Bootstapper prefab from the Resources folder.
+								The benefit of this is it doesn't matter which scene you are starting from, since the Bootstapper runs before scene load.
+								This is a great way to have singletons and managers attached to a single bootstrap prefab that gets created when the game runs.
+							</p>
+							<code>
+					public static class Bootstrapper
+					{
+					private const string prefabName = "Bootstrap";
+					
+					
+					[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+					public static void Execute()
+					{
+					GameObject existingPrefab = GameObject.Find(prefabName);
+					
+					if (existingPrefab == null)
+					{
+					GameObject bootstrapPrefab = Resources.Load(prefabName) as GameObject;
+					
+					if (bootstrapPrefab != null)
+					{
+					GameObject instantiatedPrefab = Object.Instantiate(bootstrapPrefab);
+					Object.DontDestroyOnLoad(instantiatedPrefab);
+					}
+					else
+					Debug.LogError($"Prefab '{prefabName}' not found in Resources folder.");
+					}
+					else
+					Debug.LogWarning($"Prefab '{prefabName}' already exists in the scene. Not instantiating again.");
+					}
+					}
+							</code>
+						</div>
+					</div>
+
+					<img src="Resources/Images/LoggerScreenshot.png" alt="Logger" class="image main">
+
 					<!-- Logger -->
 					<div class="code-block">
 						<div class="toggle-icon" onclick="toggleCodeContent(this)">
@@ -309,50 +368,7 @@ public class Logger : ScriptableObject
 						</div>
 					</div>		
 					
-					<!-- Bootstrapper -->
-					<div class="code-block">
-						<div class="toggle-icon" onclick="toggleCodeContent(this)">
-							<img src="Resources/Images/CodeBlockToggleOpen.png" class="open-icon">
-							<img src="Resources/Images/CodeBlockToggleClose.png" class="close-icon" style="display: none;">
-						</div>
-						<h3>Bootstrapper</h3>
-						<div class="code-content" style="display: none;">
-							<p>
-								There is many ways to implement Bootstrap logic, either having a Bootstrap scene or -script that handles project initialization.
-								I chose to go with the code solution that loads a Bootstapper prefab from the Resources folder.
-								The benefit of this is it doesn't matter which scene you are starting from, since the Bootstapper runs before scene load.
-								This is a great way to have singletons and managers attached to a single bootstrap prefab that gets created when the game runs.
-							</p>
-							<code>
-public static class Bootstrapper
-{
-	private const string prefabName = "Bootstrap";
-
-
-	[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
-	public static void Execute()
-	{
-		GameObject existingPrefab = GameObject.Find(prefabName);
-
-		if (existingPrefab == null)
-		{
-			GameObject bootstrapPrefab = Resources.Load(prefabName) as GameObject;
-
-			if (bootstrapPrefab != null)
-			{
-				GameObject instantiatedPrefab = Object.Instantiate(bootstrapPrefab);
-				Object.DontDestroyOnLoad(instantiatedPrefab);
-			}
-			else
-				Debug.LogError($"Prefab '{prefabName}' not found in Resources folder.");
-		}
-		else
-			Debug.LogWarning($"Prefab '{prefabName}' already exists in the scene. Not instantiating again.");
-	}
-}
-							</code>
-						</div>
-					</div>
+					<img src="Resources/Images/SceneSwitchWindowScreenshot.png" alt="SceneSwitchWindowScreenshot" class="image main">
 
 					<!-- Scene switch tool -->
 					<div class="code-block">
