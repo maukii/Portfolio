@@ -1,0 +1,253 @@
+<!DOCTYPE HTML>
+<!--
+	Massively by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+<head>
+	<title>Code samples</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	<meta name="keywords" content="HTML, CSS, JavaScript, Portfolio, portfolio, Mauno Kiiskinen, mauno, kiiskinen, mauno kiiskinen, Mauno, Kiiskinen">
+	<meta name="author" content="Mauno Kiiskinen">
+	<meta name="google-site-verification" content="Aofh4pmYDt6X2yZE8mhy3zLvwGaIOfhcxky0gC-Wh0s" />
+	<link rel="stylesheet" href="assets/css/main.css" />
+	<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+</head>
+
+	<body class="is-preload">
+		
+		<!-- Wrapper -->
+		<div id="wrapper">
+			<!-- Header -->
+				<header id="header">
+					<a class="logo">CODE SAMPLES</a>
+				</header>
+
+			<!-- Nav -->
+				<nav id="nav">
+					<ul class="links">
+						<li><a href="index.html">Portfolio</a></li>
+						<li><a href="about.html">About me</a></li>
+						<li class="active"><a href="samples.html">Code samples</a></li>
+					</ul>
+					<ul class="icons">
+						<li><a href="https://twitter.com/maunokiiskinen" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+						<li><a href="https://www.linkedin.com/in/mauno-kiiskinen-389045151/" class="icon brands fa-linkedin"><span class="label">Linkedin</span></a></li>
+						<li><a href="https://maukii.itch.io/" class="icon brands fa-itch-io"><span class="label">Itch-io</span></a></li>
+						<li><a href="https://github.com/maukii?tab=repositories" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
+					</ul>
+				</nav>
+
+			<!-- Main -->
+			<div id="main">
+
+				<!-- Circulation project -->
+				<section class="post">
+					<header class="major">
+						<h1><a href="https://github.com/maukii/CirculationUnity">Project Circulation</a></h1>
+						<p>
+							A hobby project focusing on circle-to-circle collisions.<br>
+							Emphasis on creating a simple project with a clean structure.
+						</p>
+					</header>
+					<!-- Video or image of the project -->
+					<video src="Resources/Videos/Circulation.mp4" controls class="image main" alt="Circulation Trailer" poster="Resources/Images/Circulation.png"></video>
+					
+					<!-- Buttons or actions related to the project -->
+					<ul class="actions special">
+						<li><a href="#" class="button large" onclick="downloadGame('Circulation')">Download Game</a></li>
+						<li><a href="https://github.com/maukii/CirculationUnity" class="button large">Github</a></li>
+					</ul>
+					
+					<!-- Game state -->
+					<div class="code-block">
+						<div class="toggle-icon" onclick="toggleCodeContent(this)">
+							<img src="Resources/Images/CodeBlockToggleOpen.png" class="open-icon">
+							<img src="Resources/Images/CodeBlockToggleClose.png" class="close-icon" style="display: none;">
+						</div>
+						<h3>Game states</h3>
+						<div class="code-content" style="display: none;">
+							<p>
+								Systems in the game are kept simple, bound to the game state.<br>
+                				The GameManager handles state updates and broadcasts changes.
+							</p>
+							<code>
+public enum GameState
+{
+	MainMenu,
+	PreparingGame,
+	GameReady,
+	Playing,
+	GameOver,
+}
+
+public static event Action&lt;GameState&gt; OnGameStateChanged;
+private GameState currentGameState = GameState.MainMenu;
+
+private void Start() =&gt; SetGameState(GameState.MainMenu);
+
+public void SetGameState(GameState newState)
+{
+    currentGameState = newState;
+    OnGameStateChanged?.Invoke(currentGameState);
+}
+							</code>
+						</div>
+					</div>
+
+					<!-- Preparing game -->
+					<div class="code-block">
+						<div class="toggle-icon" onclick="toggleCodeContent(this)">
+							<img src="Resources/Images/CodeBlockToggleOpen.png" class="open-icon">
+							<img src="Resources/Images/CodeBlockToggleClose.png" class="close-icon" style="display: none;">
+						</div>
+						<h3>Preparing game</h3>
+						<div class="code-content" style="display: none;">
+							<p>
+								Numerous components in the project are designed to react to game state alterations. 
+								One of these components focuses on preparing the game initialization process. 
+								It contains references to scripts responsible for spawning core objects such as the player and the balls. 
+								These spawners are sequenced to avoid simultaneous occurrences. 
+								Once all necessary elements are spawned, it signals the GameManager to transition the game state to "Playing."
+							</p>
+							<code>
+	private void OnEnable() =&gt; GameManager.OnGameStateChanged += OnGameStateChanged;
+	private void OnDisable() =&gt; GameManager.OnGameStateChanged -= OnGameStateChanged;
+
+	private async void OnGameStateChanged(GameManager.GameState state)
+	{
+		if (state == GameManager.GameState.PreparingGame)
+			await SpawnEntitiesSequentially();
+	}
+
+	private async Task SpawnEntitiesSequentially()
+	{
+		await ballSpawner.GenerateBallsAsync();
+		await spawnGuardSpawner.GenerateSpawnGuardAsync();
+		await playerSpawner.GeneratePlayerAsync();
+		await Task.Delay(1000);
+
+		GameManager.Instance.SetGameState(GameManager.GameState.Playing);
+	}
+							</code>
+						</div>
+					</div>
+
+					<!-- Completing game cycle -->
+					<div class="code-block">
+						<div class="toggle-icon" onclick="toggleCodeContent(this)">
+							<img src="Resources/Images/CodeBlockToggleOpen.png" class="open-icon">
+							<img src="Resources/Images/CodeBlockToggleClose.png" class="close-icon" style="display: none;">
+						</div>
+						<h3>Completing game cycle</h3>
+						<div class="code-content" style="display: none;">
+							<p>
+								Various components in the project operate independently.
+            					For instance, the player's health script manages the player's current and maximum health.
+            					It reduces the current health, while other game logic determines when health should decrease.
+            					The player health script also provides event Actions for other game logic to monitor damage or player death.
+							</p>
+							<code>
+public static event Action OnPlayerDamaged;
+public static event Action OnPlayerDied;
+
+private void Awake() =&gt; playerData.CurrentHealth = playerData.MaxHealth;
+
+public bool IsAlive() =&gt; playerData.CurrentHealth > 0;
+public int GetCurrentHealth() =&gt; playerData.CurrentHealth;
+public int GetMaxHealth() =&gt; playerData.MaxHealth;
+
+public void TakeDamage()
+{
+	playerData.CurrentHealth -= 1;
+
+	if (playerData.CurrentHealth &lt;= 0)
+	{
+		Die();
+		return;
+	}
+
+	OnPlayerDamaged?.Invoke();
+}
+
+public void Die()
+{
+	playerData.CurrentHealth = -1;
+	OnPlayerDied?.Invoke();
+	Destroy(gameObject);
+}
+							</code>
+
+							<p>
+								The GameManager oversees the player's death.
+            					Upon death, the game state transitions to "GameOver."
+							</p>
+							<code>
+private void OnEnable() =&gt; PlayerHealth.OnPlayerDied += OnPlayerDied;
+private void OnDisable() =&gt; PlayerHealth.OnPlayerDied -= OnPlayerDied;
+private void OnPlayerDied() =&gt; SetGameState(GameState.GameOver);
+							</code>
+						</div>
+					</div>
+
+					<!-- Game state binded UI -->
+					<div class="code-block">
+						<div class="toggle-icon" onclick="toggleCodeContent(this)">
+							<img src="Resources/Images/CodeBlockToggleOpen.png" class="open-icon">
+							<img src="Resources/Images/CodeBlockToggleClose.png" class="close-icon" style="display: none;">
+						</div>
+						<h3>Game state binded UI</h3>
+						<div class="code-content" style="display: none;">
+							<p>
+								The UI design aligns with the game state, simplifying UI management.
+								Game object components with GameStateUI activate when the associated game state matches.
+								This setup facilitates easy addition of a pause state and associated UI.
+							</p>
+							<code>
+public class GameStateUI : MonoBehaviour
+{
+[SerializeField] protected GameManager.GameState associatedState;
+
+
+protected virtual void OnEnable() =&gt; GameManager.OnGameStateChanged += OnGameStateChanged;
+protected virtual void OnDisable() =&gt; GameManager.OnGameStateChanged -= OnGameStateChanged;
+
+protected virtual void OnGameStateChanged(GameManager.GameState state)
+{
+if (state == associatedState)
+	EnableUI();
+else
+	DisableUI();
+}
+
+protected virtual void EnableUI() => transform.GetChild(0).gameObject.SetActive(true);
+protected virtual void DisableUI() => transform.GetChild(0).gameObject.SetActive(false);
+}
+							</code>
+						</div>
+					</div>
+				</section>
+
+			</div>
+		</div>
+
+		<!-- Copyright -->
+			<div id="copyright">
+				<ul><li>&copy; FutureProgrammer</li><li>Design: <a href="https://html5up.net">HTML5 UP</a></li><li>Theme: <a href="@ajlkn">@ajlkn</a></li></ul>
+			</div>
+
+		<!-- Scripts -->
+		<script src="assets/js/downloadGame.js"></script>
+		<script src="assets/js/codeBlockToggle.js"></script>
+		<script src="assets/js/jquery.min.js"></script>
+		<script src="assets/js/jquery.scrollex.min.js"></script>
+		<script src="assets/js/jquery.scrolly.min.js"></script>
+		<script src="assets/js/browser.min.js"></script>
+		<script src="assets/js/breakpoints.min.js"></script>
+		<script src="assets/js/util.js"></script>
+		<script src="assets/js/main.js"></script>
+
+	</body>
+</html>
