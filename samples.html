@@ -113,24 +113,23 @@ public void SetGameState(GameState newState)
 								Once all necessary elements are spawned, it signals the GameManager to transition the game state to "Playing."
 							</p>
 							<code>
-	private void OnEnable() =&gt; GameManager.OnGameStateChanged += OnGameStateChanged;
-	private void OnDisable() =&gt; GameManager.OnGameStateChanged -= OnGameStateChanged;
+private void OnEnable() =&gt; GameManager.OnGameStateChanged += OnGameStateChanged;
+private void OnDisable() =&gt; GameManager.OnGameStateChanged -= OnGameStateChanged;
 
-	private async void OnGameStateChanged(GameManager.GameState state)
-	{
-		if (state == GameManager.GameState.PreparingGame)
-			await SpawnEntitiesSequentially();
-	}
+private async void OnGameStateChanged(GameManager.GameState state)
+{
+	if (state == GameManager.GameState.PreparingGame)
+		await SpawnEntitiesSequentially();
+}
 
-	private async Task SpawnEntitiesSequentially()
-	{
-		await ballSpawner.GenerateBallsAsync();
-		await spawnGuardSpawner.GenerateSpawnGuardAsync();
-		await playerSpawner.GeneratePlayerAsync();
-		await Task.Delay(1000);
-
-		GameManager.Instance.SetGameState(GameManager.GameState.Playing);
-	}
+private async Task SpawnEntitiesSequentially()
+{
+	await ballSpawner.GenerateBallsAsync();
+	await spawnGuardSpawner.GenerateSpawnGuardAsync();
+	await playerSpawner.GeneratePlayerAsync();
+	await Task.Delay(1000);
+	GameManager.Instance.SetGameState(GameManager.GameState.Playing);
+}
 							</code>
 						</div>
 					</div>
@@ -208,22 +207,22 @@ private void OnPlayerDied() =&gt; SetGameState(GameState.GameOver);
 							<code>
 public class GameStateUI : MonoBehaviour
 {
-[SerializeField] protected GameManager.GameState associatedState;
+	[SerializeField] protected GameManager.GameState associatedState;
 
 
-protected virtual void OnEnable() =&gt; GameManager.OnGameStateChanged += OnGameStateChanged;
-protected virtual void OnDisable() =&gt; GameManager.OnGameStateChanged -= OnGameStateChanged;
+	protected virtual void OnEnable() =&gt; GameManager.OnGameStateChanged += OnGameStateChanged;
+	protected virtual void OnDisable() =&gt; GameManager.OnGameStateChanged -= OnGameStateChanged;
 
-protected virtual void OnGameStateChanged(GameManager.GameState state)
-{
-if (state == associatedState)
-	EnableUI();
-else
-	DisableUI();
-}
+	protected virtual void OnGameStateChanged(GameManager.GameState state)
+	{
+		if (state == associatedState)
+			EnableUI();
+		else
+			DisableUI();
+	}
 
-protected virtual void EnableUI() => transform.GetChild(0).gameObject.SetActive(true);
-protected virtual void DisableUI() => transform.GetChild(0).gameObject.SetActive(false);
+	protected virtual void EnableUI() => transform.GetChild(0).gameObject.SetActive(true);
+	protected virtual void DisableUI() => transform.GetChild(0).gameObject.SetActive(false);
 }
 							</code>
 						</div>
