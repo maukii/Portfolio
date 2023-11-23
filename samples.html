@@ -229,6 +229,169 @@ public class GameStateUI : MonoBehaviour
 					</div>
 				</section>
 
+				<!-- Bootstrap project -->
+				<section class="post">
+					<header class="major">
+						<h1><a href="https://github.com/maukii/Bootstrap">Bootstrap Project</a></h1>
+						<p>
+							Project that contains many useful tools and helper classes.
+							When I work with Unity this my custom package I always bring to my projects.
+						</p>
+					</header>
+					
+					<!-- Buttons or actions related to the project -->
+					<ul class="actions special">
+						<li><a href="#" class="button large" onclick="downloadGame('Bootstrap')">Download Unity package</a></li>
+						<li><a href="https://github.com/maukii/Bootstrap" class="button large">Github</a></li>
+					</ul>
+					
+					<!-- Logger -->
+					<div class="code-block">
+						<div class="toggle-icon" onclick="toggleCodeContent(this)">
+							<img src="Resources/Images/CodeBlockToggleOpen.png" class="open-icon">
+							<img src="Resources/Images/CodeBlockToggleClose.png" class="close-icon" style="display: none;">
+						</div>
+						<h3>Logger</h3>
+						<div class="code-content" style="display: none;">
+							<p>
+								When projects get bigger there will be more systems and logic running at the same time.
+								Using Unitys Debug.Log messaging can work as long as the console doesn't get bloatet with information.
+								Sometimes when that happens I've used Debug.Error messages to find the logs I want to see.
+								That's not how error logs are supposed to be used so that's when I decided to create this little logger.
+								<br><br>
+								Main points of this is to allow to have different loggers such as AudioLogger and InputLogger, which have their own color in the prefix when they log data.
+								Having the option to disable some loggers is also nice, which makes debugging easier and console less bloatet with log messages.
+							</p>
+							<code>
+[CreateAssetMenu(fileName = "Logger", menuName = "Logger/new Logger")]
+public class Logger : ScriptableObject
+{
+	public enum LogType
+	{
+		Info = 0,
+		Warning = 1,
+		Error = 2,
+	}
+
+	[SerializeField] private bool showLogs = true;
+	[SerializeField] private string prefix = "";
+	[SerializeField] private Color prefixColor = Color.green;
+
+
+	public void Log(string msg, Object sender = null) =&gt; LogMessage(msg, sender, LogType.Info);
+	public void Warning(string msg, Object sender = null) =&gt; LogMessage(msg, sender, LogType.Warning);
+	public void Error(string msg, Object sender = null) =&gt; LogMessage(msg, sender, LogType.Error);
+
+	private void LogMessage(string message, Object sender, LogType logType = LogType.Info)
+	{
+		if (!showLogs) return;
+
+		string logMessage = $"[&lt;color=#{ColorUtility.ToHtmlStringRGB(prefixColor)}&gt;{prefix}&lt;/color&gt;] {message}";
+
+		switch (logType)
+		{
+			case LogType.Info:
+				Debug.Log(logMessage, sender);
+				break;
+			case LogType.Warning:
+				Debug.LogWarning(logMessage, sender);
+				break;
+			case LogType.Error:
+				Debug.LogError(logMessage, sender);
+				break;
+			default:
+				Debug.Log(logMessage, sender);
+				break;
+		}
+	}
+}
+							</code>
+						</div>
+					</div>		
+					
+					<!-- Bootstrapper -->
+					<div class="code-block">
+						<div class="toggle-icon" onclick="toggleCodeContent(this)">
+							<img src="Resources/Images/CodeBlockToggleOpen.png" class="open-icon">
+							<img src="Resources/Images/CodeBlockToggleClose.png" class="close-icon" style="display: none;">
+						</div>
+						<h3>Bootstrapper</h3>
+						<div class="code-content" style="display: none;">
+							<p>
+								There is many ways to implement Bootstrap logic, either having a Bootstrap scene or -script that handles project initialization.
+								I chose to go with the code solution that loads a Bootstapper prefab from the Resources folder.
+								The benefit of this is it doesn't matter which scene you are starting from, since the Bootstapper runs before scene load.
+								This is a great way to have singletons and managers attached to a single bootstrap prefab that gets created when the game runs.
+							</p>
+							<code>
+public static class Bootstrapper
+{
+	[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+	public static void Execute() =&gt; Object.DontDestroyOnLoad(Object.Instantiate(Resources.Load("Bootstrap")));
+}
+							</code>
+						</div>
+					</div>
+
+					<!-- Scene switch tool -->
+					<div class="code-block">
+						<div class="toggle-icon" onclick="toggleCodeContent(this)">
+							<img src="Resources/Images/CodeBlockToggleOpen.png" class="open-icon">
+							<img src="Resources/Images/CodeBlockToggleClose.png" class="close-icon" style="display: none;">
+						</div>
+						<h3>Scene switch tool</h3>
+						<div class="code-content" style="display: none;">
+							<p>
+								Another tool that makes development faster in the long run.
+								When project gets bigger, some content will be moved over to their own scenes in Unity.
+								Just to make life a little easier I made a scene switching tool way back.
+								It gets all scene files from the project and displays them on a separate window and allowing scene switching to them.
+							</p>
+							<code>
+public class SceneSwitchWindow : EditorWindow
+{
+	[MenuItem("Tools/Scene Switch Window")]
+	public static void Init()
+	{
+		SceneSwitchWindow window = GetWindow&lt;SceneSwitchWindow&gt;("Scene Switch Tool");
+		window.minSize = new Vector2(200f, 200f);
+	}
+
+	private void OnGUI() =&gt; ScenesToButtons();
+
+	void ScenesToButtons()
+	{
+		string[] sceneGuids = AssetDatabase.FindAssets("t:Scene");
+		List&lt;string&gt; scenePaths = new List&lt;string&gt;();
+
+		foreach (string guid in sceneGuids)
+		{
+			string path = AssetDatabase.GUIDToAssetPath(guid);
+			scenePaths.Add(path);
+		}
+
+		for (int i = 0; i &lt; scenePaths.Count; i++)
+		{
+			string scenePath = scenePaths[i];
+			string sceneName = Path.GetFileNameWithoutExtension(scenePath);
+			bool pressed = GUILayout.Button($"{sceneName}", GUI.skin.button);
+
+			if (pressed)
+				SwitchToScene(scenePath);
+		}
+	}
+
+	private void SwitchToScene(string scenePath)
+	{
+		if (EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo())
+			EditorSceneManager.OpenScene(scenePath);
+	}
+}
+							</code>
+						</div>
+					</div>
+				</section>
+
 			</div>
 		</div>
 

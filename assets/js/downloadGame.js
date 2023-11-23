@@ -1,6 +1,7 @@
 function downloadGame(gameName) {
     const gameLinks = {
         Circulation: 'Resources/Builds/Circulation.zip',
+        Bootstrap: 'Resource/Builds/Bootstrap.zip',
     };
 
     const downloadLink = gameLinks[gameName];
