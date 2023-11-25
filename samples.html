@@ -144,10 +144,9 @@ private async Task SpawnEntitiesSequentially()
 						<h3>Completing game cycle</h3>
 						<div class="code-content" style="display: none;">
 							<p>
-								Various components in the project operate independently.
-            					For instance, the player's health script manages the player's current and maximum health.
-            					It reduces the current health, while other game logic determines when health should decrease.
-            					The player health script also provides event Actions for other game logic to monitor damage or player death.
+								In this project, the Player's Health Script serves as an independent module, managing the player's health logic. 
+								This script enables seamless interaction with other game components and handles all health-related operations. 
+								Additionally, when the player dies, a separate component listens for the OnPlayerDied event, and changes the game state.
 							</p>
 							<code>
 public static event Action OnPlayerDamaged;
