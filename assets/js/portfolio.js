@@ -182,12 +182,14 @@
 			card.type = 'button';
 			card.setAttribute('aria-label', p.title);
 			card.innerHTML =
-				'<div class="card-thumb"><img src="' + p.thumb + '" alt="" loading="lazy" /></div>' +
-				'<div class="card-body">' +
-					'<span class="card-tag">' + p.tag + '</span>' +
-					'<h3>' + p.title + '</h3>' +
-					'<span class="card-date">' + p.date + '</span>' +
-					'<span class="card-cta">View project <i class="fas fa-arrow-right"></i></span>' +
+				'<div class="card-inner">' +
+					'<div class="card-thumb"><img src="' + p.thumb + '" alt="" loading="lazy" /><span class="card-shine"></span></div>' +
+					'<div class="card-body">' +
+						'<span class="card-tag">' + p.tag + '</span>' +
+						'<h3>' + p.title + '</h3>' +
+						'<span class="card-date">' + p.date + '</span>' +
+						'<span class="card-cta">View project <i class="fas fa-arrow-right"></i></span>' +
+					'</div>' +
 				'</div>';
 			card.addEventListener('click', function () {
 				if (i === self.index) { openModal(p); }

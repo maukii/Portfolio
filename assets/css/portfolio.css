@@ -124,7 +124,7 @@ img, video { max-width: 100%; display: block; }
 	transition: color 0.2s var(--ease);
 }
 .brand-text strong { color: var(--cream); font-weight: 700; margin-left: 0.4em; }
-.brand:hover .brand-text { color: var(--cream); }
+.brand:hover .brand-text { color: var(--cream); animation: textGlitch 0.32s steps(2, end) 1; }
 
 .main-nav { position: relative; display: flex; gap: 0.4rem; }
 .nav-link {
@@ -134,8 +134,15 @@ img, video { max-width: 100%; display: block; }
 	padding: 0.5rem 1.05rem; border-radius: 6px;
 	transition: color 0.3s var(--ease);
 }
-.nav-link:hover { color: var(--cream); }
+.nav-link:hover { color: var(--cream); animation: textGlitch 0.32s steps(2, end) 1; }
 .nav-link.is-active { color: var(--bg-deep); }
+@keyframes textGlitch {
+	0%   { text-shadow: none; transform: translate(0, 0); }
+	25%  { text-shadow: -2px 0 var(--rose), 2px 0 rgba(237, 216, 189, 0.7); transform: translate(1px, -1px); }
+	50%  { text-shadow: 2px 0 var(--rose), -2px 0 rgba(237, 216, 189, 0.7); transform: translate(-1px, 1px); }
+	75%  { text-shadow: -1px 0 var(--rose), 1px 0 rgba(237, 216, 189, 0.7); transform: translate(1px, 0); }
+	100% { text-shadow: none; transform: translate(0, 0); }
+}
 .nav-indicator {
 	position: absolute; top: 0; left: 0; height: 100%;
 	border-radius: 6px;
@@ -191,6 +198,16 @@ img, video { max-width: 100%; display: block; }
 }
 .view-head p { color: var(--muted); font-size: 1.02rem; line-height: 1.6; margin: 0; }
 
+.view-head h1, .about-body h1 { cursor: default; }
+.view-head h1:hover, .about-body h1:hover { animation: headGlitch 0.42s steps(2, end) 1; }
+@keyframes headGlitch {
+	0%   { text-shadow: 4px 4px 0 var(--rose); transform: translate(0, 0) skewX(0); }
+	20%  { text-shadow: 4px 4px 0 var(--rose), -4px 0 rgba(237, 216, 189, 0.55); transform: translate(3px, -1px) skewX(-2deg); }
+	45%  { text-shadow: 4px 4px 0 var(--rose), 4px 0 rgba(237, 216, 189, 0.55); transform: translate(-3px, 1px) skewX(2deg); }
+	70%  { text-shadow: 4px 4px 0 var(--rose), -2px 0 rgba(237, 216, 189, 0.4); transform: translate(2px, 0) skewX(0); }
+	100% { text-shadow: 4px 4px 0 var(--rose); transform: translate(0, 0) skewX(0); }
+}
+
 .carousel { position: relative; }
 .carousel-stage {
 	position: relative;
@@ -212,24 +229,52 @@ img, video { max-width: 100%; display: block; }
 		translateX(calc(var(--offset) * 60%))
 		translateZ(calc(var(--offset) * var(--offset) * -120px))
 		rotateY(calc(var(--offset) * -22deg))
-		scale(calc(1 - min(abs(var(--offset)), 2) * 0.12));
+		scale(calc(1 - min(abs(var(--offset)), 2) * 0.18));
 	transition: transform 0.6s var(--ease), opacity 0.6s var(--ease), box-shadow 0.3s var(--ease), border-color 0.3s var(--ease);
-	opacity: calc(1 - min(abs(var(--offset)), 2) * 0.32);
+	opacity: calc(1 - min(abs(var(--offset)), 2) * 0.42);
 	box-shadow: var(--shadow-card);
 }
 @supports not (width: abs(1px)) {
 	.card { transform: translate(-50%, -50%) translateX(calc(var(--offset) * 60%)) rotateY(calc(var(--offset) * -22deg)); }
 }
+/* center card pops out bigger than the rest */
 .card.is-active {
+	transform: translate(-50%, -50%) scale(1.14);
 	border-color: var(--rose);
 	box-shadow: 10px 10px 0 var(--rose);
 	cursor: pointer;
 }
-.card:not(.is-active) { pointer-events: auto; filter: saturate(0.8) brightness(0.9); }
+.card.is-active:hover { box-shadow: 14px 14px 0 var(--rose); }
+.card:not(.is-active) { pointer-events: auto; filter: saturate(0.8) brightness(0.85); }
+.card:not(.is-active):hover { filter: none; box-shadow: 12px 12px 0 rgba(0, 0, 0, 0.4); }
 
-.card-thumb { aspect-ratio: 16 / 10; overflow: hidden; background: var(--bg-deep); border-bottom: 2px solid var(--border); }
-.card-thumb img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s var(--ease); }
+.card-inner { display: block; transform-origin: center; }
+.card:hover .card-inner { animation: cardShake 0.5s var(--ease); }
+@keyframes cardShake {
+	0%, 100% { transform: translate3d(0, 0, 0) rotate(0); }
+	15% { transform: translate3d(-3px, 0, 0) rotate(-1deg); }
+	30% { transform: translate3d(3px, 0, 0) rotate(1deg); }
+	45% { transform: translate3d(-2px, 0, 0) rotate(-0.6deg); }
+	60% { transform: translate3d(2px, 0, 0) rotate(0.6deg); }
+	75% { transform: translate3d(-1px, 0, 0) rotate(-0.3deg); }
+}
+
+.card-thumb { position: relative; aspect-ratio: 16 / 10; overflow: hidden; background: var(--bg-deep); border-bottom: 2px solid var(--border); }
+.card-thumb img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s var(--ease), filter 0.4s var(--ease); }
 .card.is-active .card-thumb img { transform: scale(1.04); }
+.card:hover .card-thumb img { transform: scale(1.08); filter: brightness(1.1) saturate(1.1); }
+
+.card-shine {
+	position: absolute; top: 0; left: -75%; width: 50%; height: 100%;
+	background: linear-gradient(100deg, transparent, rgba(237, 216, 189, 0.3), transparent);
+	transform: skewX(-18deg); pointer-events: none; opacity: 0;
+}
+.card:hover .card-shine { animation: shineSweep 0.75s var(--ease); }
+@keyframes shineSweep {
+	0% { left: -75%; opacity: 0; }
+	15% { opacity: 1; }
+	100% { left: 130%; opacity: 0; }
+}
 
 .card-body { padding: 1.1rem 1.3rem 1.4rem; position: relative; }
 .card-tag {
@@ -240,7 +285,9 @@ img, video { max-width: 100%; display: block; }
 .card-body h3 {
 	font-family: var(--font-display); font-weight: 600;
 	font-size: 1.4rem; line-height: 1.15; margin: 0 0 0.35rem; color: var(--cream);
+	text-shadow: 0 0 0 var(--rose); transition: text-shadow 0.3s var(--ease);
 }
+.card:hover .card-body h3 { text-shadow: 2px 2px 0 var(--rose); }
 .card-date { display: block; color: var(--faint); font-size: 0.85rem; }
 .card-cta {
 	display: inline-flex; align-items: center; gap: 0.4rem;
@@ -248,9 +295,10 @@ img, video { max-width: 100%; display: block; }
 	font-size: 0.95rem; color: var(--rose-light);
 	opacity: 0; transform: translateY(6px); transition: all 0.4s var(--ease);
 }
-.card.is-active .card-cta { opacity: 1; transform: none; }
+.card.is-active .card-cta,
+.card:hover .card-cta { opacity: 1; transform: none; }
 .card-cta i { transition: transform 0.3s var(--ease); }
-.card.is-active:hover .card-cta i { transform: translateX(5px); }
+.card:hover .card-cta i { transform: translateX(5px); }
 
 .carousel-controls {
 	display: flex; align-items: center; justify-content: center; gap: 1.2rem;
