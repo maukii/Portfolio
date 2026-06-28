@@ -390,8 +390,8 @@ img, video { max-width: 100%; display: block; }
 }
 .modal-panel {
 	position: relative; z-index: 1;
-	display: grid; grid-template-columns: 1.1fr 1fr;
-	width: min(960px, 100%); max-height: 88vh; overflow: hidden;
+	display: grid; grid-template-columns: 1.7fr 1fr;
+	width: min(80vw, 1500px); max-height: 88vh; overflow: hidden;
 	background: var(--bg-deep);
 	border: 2px solid var(--rose); border-radius: 12px;
 	box-shadow: 14px 14px 0 var(--rose);
@@ -399,8 +399,8 @@ img, video { max-width: 100%; display: block; }
 	transition: transform 0.4s var(--ease), opacity 0.4s var(--ease);
 }
 .modal.is-open .modal-panel { transform: none; opacity: 1; }
-.modal-media { background: #000; display: grid; border-right: 2px solid var(--border); }
-.modal-media img, .modal-media video { width: 100%; height: 100%; max-height: 88vh; object-fit: cover; }
+.modal-media { background: #000; display: flex; align-items: center; justify-content: center; border-right: 2px solid var(--border); }
+.modal-media img, .modal-media video { width: 100%; height: 100%; max-height: 88vh; object-fit: contain; }
 .modal-info { padding: clamp(1.5rem, 3vw, 2.4rem); overflow-y: auto; }
 .modal-badge {
 	display: inline-block; font-family: var(--font-pixel);
@@ -442,9 +442,9 @@ img, video { max-width: 100%; display: block; }
 }
 
 @media (max-width: 860px) {
-	.modal-panel { grid-template-columns: 1fr; max-height: 90vh; overflow-y: auto; }
-	.modal-media { max-height: 38vh; border-right: 0; border-bottom: 2px solid var(--border); }
-	.modal-media img, .modal-media video { max-height: 38vh; }
+	.modal-panel { grid-template-columns: 1fr; width: min(94vw, 680px); max-height: 90vh; overflow-y: auto; }
+	.modal-media { max-height: 46vh; border-right: 0; border-bottom: 2px solid var(--border); }
+	.modal-media img, .modal-media video { max-height: 46vh; }
 	.about-wrap { grid-template-columns: 1fr; }
 	.about-media { max-width: 320px; }
 }
