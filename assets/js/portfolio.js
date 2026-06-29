@@ -97,6 +97,32 @@
 
 		gamejam: [
 			{
+				id: 'pondwise',
+				title: 'Pondwise',
+				date: 'Comfy Jam: Summer 2026',
+				tag: 'Cozy puzzle',
+				thumb: 'Resources/Images/pondwise.png',
+				media: { type: 'image', src: 'Resources/Images/pondwise.png' },
+				tagline: 'A cozy puzzle about keeping frogs happy. Rewrite the rules in your book so every frog gets the neighbours it loves, dodges the ones it hates, and maybe lands a few it likes.',
+				role: 'I was one of two programmers on the team and handled everything outside the core puzzle rule logic.',
+				links: [
+					{ label: 'Itch-io', url: 'https://maukii.itch.io/pondwise' }
+				]
+			},
+			{
+				id: 'kick-the-puppet',
+				title: 'Kick The Puppet',
+				date: 'Finnish Game Jam 2026',
+				tag: 'Spot the odd one',
+				thumb: 'Resources/Images/kickthepuppet.png',
+				media: { type: 'image', src: 'Resources/Images/kickthepuppet.png' },
+				tagline: 'Find the puppet that differs from the others and give it the BOOT before it\'s too late. Watch out though, they are tricky little fellas!',
+				role: 'I was the sole programmer and implemented everything in Unity, from the boot controls and the kick to the logic that singles out the odd puppet and runs each round.',
+				links: [
+					{ label: 'Itch-io', url: 'https://maukii.itch.io/kick-the-puppet' }
+				]
+			},
+			{
 				id: 'dot-garden',
 				title: 'Dot Garden',
 				date: 'Global Game Jam 2021',
@@ -127,7 +153,7 @@
 				title: 'JANTOR',
 				date: 'Ludum Dare 47 · 13th place',
 				tag: 'GameMaker Studio 2',
-				thumb: 'Resources/Images/JANTOR.png',
+				thumb: 'Resources/Videos/JANTOR.gif',
 				media: { type: 'image', src: 'Resources/Videos/JANTOR.gif' },
 				tagline: 'A boss-fight loop game and my first project built in GameMaker Studio 2. It placed 13th in Ludum Dare 47.',
 				role: "I built the loop system that drives player movement and JANTOR's living, looping motion, plus JANTOR's attacks, phases and the core gameplay loop.",
