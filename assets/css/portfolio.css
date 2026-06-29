@@ -360,7 +360,12 @@ img, video { max-width: 100%; display: block; }
 	background: linear-gradient(160deg, transparent 55%, rgba(139,87,96,0.35));
 	pointer-events: none;
 }
-.about-photo img { width: 100%; aspect-ratio: 3 / 4; object-fit: cover; }
+.about-photo img {
+	width: 100%; aspect-ratio: 1 / 1; object-fit: contain;
+	image-rendering: pixelated;
+	background: radial-gradient(circle at 50% 38%, var(--panel), var(--bg-deep));
+	padding: 12%;
+}
 .about-badges { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.4rem; }
 .about-badges span {
 	font-family: var(--font-pixel); font-size: 0.55rem; line-height: 1.4;
